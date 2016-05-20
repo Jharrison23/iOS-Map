@@ -8,17 +8,81 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+////import MapKit to fix the error with MKMapView
+import MapKit
 
+////import coreLocation to get users current location
+import CoreLocation
+
+////add MKMapViewDelegate and CLLocationMangerDelegate to function protocal, for use in the function
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
+{
+
+    //// Held control and dragged our map view UI to the code to link the user interface to the code through an outlet
+    @IBOutlet weak var mapView: MKMapView!
+    
+    
+    ////Create a location manager property
+    let locationManager = CLLocationManager()
+    
+    
+    
+    ////Set up location manager, so we can find the current location after the view loaded
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        ////Conform to delagate method
+        self.locationManager.delegate = self
+        
+        ////Gets the best accuracy for the users location
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        ////Only user location services when youre using the app, not when the app is in the background
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        ////Turn on the locatio manager to look for location
+        self.locationManager.startUpdatingLocation()
+        
+        ////shows the blue dot marking the user location on the map
+        self.mapView.showsUserLocation = true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    
+    //// MARK: - Location Delegate Methods
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        ////didUpdateLocations will run until we stop it, once startUpdatingLocation executes, so this gets most current location
+        let location = locations.last
+    
+        ////Get the center out of that location variable
+        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+    
+        ////create a region, basically a circle that the map zooms to, MKCoordinateSpan controls how much it zooms, smaller the number the closer zoom
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
+        
+        ////set the mapview to the region created above, at the latitude and longitude from center, set animated to true so you get the zoom animation
+        self.mapView.setRegion(region, animated: true)
+        
+        ////Once we have gotten the users current location and the map view is zoomed in, stop updating the current location
+        self.locationManager.stopUpdatingLocation()
+        
+    }
+    
+    
+    //// MARK: - ERROR management
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        
+        ////prints out an error to the debugger if we have one with the location manager
+        print("Errors : " + error.localizedDescription)
+    }
+    
 
 
 }
