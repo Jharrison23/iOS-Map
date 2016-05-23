@@ -77,7 +77,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         ////create a region, basically a circle that the map zooms to, MKCoordinateSpan controls how much it zooms, smaller the number the closer zoom
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
         
-        ////set the mapview to the region created above, at the latitude and longitude from center, set animated to true so you get the zoom animation -test
+        ////set the mapview to the region created above, at the latitude and longitude from center, set animated to true so you get the zoom animation
         self.mapView.setRegion(region, animated: true)
         
         ////Once we have gotten the users current location and the map view is zoomed in, stop updating the current location
