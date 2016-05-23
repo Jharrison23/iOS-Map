@@ -45,6 +45,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         ////shows the blue dot marking the user location on the map
         self.mapView.showsUserLocation = true
+        
+        
+        ////Changes the color of the User location icon
+        mapView.tintColor = UIColor.greenColor()
+        
+        
+        ////This is how i think ill end up changing the picture
+        //        var userIcon = mapView.dequeueReusableAnnotationViewWithIdentifier("image")
+        //        userIcon = MKAnnotationView(annotation: annotation, reuseIdentifier: "image")
+        //        userIcon!.image = UIImage(named: "image")
+        
     }
 
     override func didReceiveMemoryWarning() {
