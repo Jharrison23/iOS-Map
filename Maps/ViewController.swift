@@ -21,6 +21,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     //// Held control and dragged our map view UI to the code to link the user interface to the code through an outlet
     @IBOutlet weak var mapView: MKMapView!
     
+    ////Label to display the speed and method of transportation
+    @IBOutlet weak var label: UILabel!
     
     ////Create a location manager property
     let locationManager = CLLocationManager()
@@ -78,12 +80,66 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
         
         ////set the mapview to the region created above, at the latitude and longitude from center, set animated to true so you get the zoom animation
-        self.mapView.setRegion(region, animated: true)
+        //self.mapView.setRegion(region, animated: true)
         
         ////Once we have gotten the users current location and the map view is zoomed in, stop updating the current location
-        self.locationManager.stopUpdatingLocation()
+        //self.locationManager.stopUpdatingLocation()
+        
+        
+        ////Varible for speed of type double, from CLLocationSpeed
+        var speed: CLLocationSpeed = CLLocationSpeed()
+        speed = locationManager.location!.speed
+        print(speed);
+        
+        ////Convert to mph
+        let mph = speed * 2.237
+        
+        ////if the speed is less than 2 MPH
+        if mph < 2.00
+        {
+            ////Change the user location icon to purple
+            mapView.tintColor = UIColor.purpleColor()
+            
+            ////Display the speed as a string to the label, "\()" converts the value to a string
+            label.text = "Speed: \(mph) MPH, Walk"
+        }
+            
+            ////if the speed is 2 > MPH < 4
+        else if mph >= 2.00 && mph <= 4.00
+        {
+            ////Change the user location icon to blue
+            mapView.tintColor = UIColor.blueColor()
+            
+            ////Display the speed as a string to the label, "\()" converts the value to a string
+            label.text = "Speed: \(mph) MPH, Fast Walk"
+        }
+            
+            
+            ////if the speed 4 > MPH < 7
+        else if mph > 4.00 && mph <= 7.00
+        {
+            ////Change the user location icon to purple
+            mapView.tintColor = UIColor.greenColor()
+            
+            ////Display the speed as a string to the label, "\()" converts the value to a string
+            label.text = "Speed: \(mph) MPH, Running"
+        }
+            
+            ////if the speed > 7
+        else if mph > 4.00 && mph <= 7.00
+        {
+            ////Change the user location icon to purple
+            mapView.tintColor = UIColor.greenColor()
+            
+            ////Display the speed as a string to the label, "\()" converts the value to a string
+            label.text = "Speed: \(mph) MPH, Driving"
+        }
+        
         
     }
+
+        
+    
     
     
     //// MARK: - ERROR management
