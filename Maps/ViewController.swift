@@ -89,6 +89,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         ////Varible for speed of type double, from CLLocationSpeed
         var speed: CLLocationSpeed = CLLocationSpeed()
         speed = locationManager.location!.speed
+        
+        ////Stops the location manager from pausing the location updates, which stopped speed from being updated
+        //locationManager.pausesLocationUpdatesAutomatically = false;
         print(speed);
         
         ////Convert to mph
@@ -126,10 +129,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
             
             ////if the speed > 7
-        else if mph > 4.00 && mph <= 7.00
+        else if mph > 7.00
         {
             ////Change the user location icon to purple
-            mapView.tintColor = UIColor.greenColor()
+            mapView.tintColor = UIColor.redColor()
             
             ////Display the speed as a string to the label, "\()" converts the value to a string
             label.text = "Speed: \(mph) MPH, Driving"
