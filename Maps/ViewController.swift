@@ -91,7 +91,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         speed = locationManager.location!.speed
         
         ////Stops the location manager from pausing the location updates, which stopped speed from being updated
-        //locationManager.pausesLocationUpdatesAutomatically = false;
+        ////locationManager.pausesLocationUpdatesAutomatically = false;
         print(speed);
         
         ////Convert to mph
@@ -103,8 +103,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             ////Change the user location icon to purple
             mapView.tintColor = UIColor.purpleColor()
             
+            ////Adds a title once you click the user location icon
+            self.mapView.userLocation.title = "I'm Walking"
+            
+            ////Formats mph to have 2 decimal places
+            let formatMph = String(format: "%.2f", mph)
+            
             ////Display the speed as a string to the label, "\()" converts the value to a string
-            label.text = "Speed: \(mph) MPH, Walk"
+            label.text = "Speed: \(formatMph) MPH, Walk"
         }
             
             ////if the speed is 2 > MPH < 4
@@ -113,19 +119,31 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             ////Change the user location icon to blue
             mapView.tintColor = UIColor.blueColor()
             
+            ////Adds a title once you click the user location icon
+            self.mapView.userLocation.title = "I'm Walking Fast"
+            
+            ////Formats mph to have 2 decimal places
+            let formatMph = String(format: "%.2f", mph)
+            
             ////Display the speed as a string to the label, "\()" converts the value to a string
-            label.text = "Speed: \(mph) MPH, Fast Walk"
+            label.text = "Speed: \(formatMph) MPH, Walk"
         }
             
             
-            ////if the speed 4 > MPH < 7
+        ////if the speed 4 > MPH < 7
         else if mph > 4.00 && mph <= 7.00
         {
             ////Change the user location icon to purple
             mapView.tintColor = UIColor.greenColor()
             
+            ////Adds a title once you click the user location icon
+            self.mapView.userLocation.title = "I'm Running"
+            
+            ////Formats mph to have 2 decimal places
+            let formatMph = String(format: "%.2f", mph)
+            
             ////Display the speed as a string to the label, "\()" converts the value to a string
-            label.text = "Speed: \(mph) MPH, Running"
+            label.text = "Speed: \(formatMph) MPH, Walk"
         }
             
             ////if the speed > 7
@@ -134,8 +152,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             ////Change the user location icon to purple
             mapView.tintColor = UIColor.redColor()
             
+            ////Adds a title once you click the user location icon
+            self.mapView.userLocation.title = "I'm Driving"
+            
+            ////Formats mph to have 2 decimal places
+            let formatMph = String(format: "%.2f", mph)
+            
             ////Display the speed as a string to the label, "\()" converts the value to a string
-            label.text = "Speed: \(mph) MPH, Driving"
+            label.text = "Speed: \(formatMph) MPH, Walk"
+
         }
         
         
