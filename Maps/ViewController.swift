@@ -97,8 +97,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         ////Convert to mph
         let mph = speed * 2.237
         
+        //if the speed is a negative number, it is invalid
+        if mph < 0
+        {
+            print("Invalid Speed")
+        }
+        
         ////if the speed is less than 2 MPH
-        if mph < 2.00
+        else if mph >= 0 && mph < 2.00
         {
             ////Change the user location icon to purple
             mapView.tintColor = UIColor.purpleColor()
@@ -113,7 +119,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             label.text = "Speed: \(formatMph) MPH, Walk"
         }
             
-            ////if the speed is 2 > MPH < 4
+        ////if the speed is 2 > MPH < 4
         else if mph >= 2.00 && mph <= 4.00
         {
             ////Change the user location icon to blue
@@ -146,7 +152,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             label.text = "Speed: \(formatMph) MPH, Walk"
         }
             
-            ////if the speed > 7
+        ////if the speed > 7
         else if mph > 7.00
         {
             ////Change the user location icon to purple
@@ -162,13 +168,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             label.text = "Speed: \(formatMph) MPH, Walk"
 
         }
-        
-        
     }
 
-        
-    
-    
     
     //// MARK: - ERROR management
     
