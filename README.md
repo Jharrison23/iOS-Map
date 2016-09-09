@@ -1,0 +1,1 @@
+An Application Written in Swift by James Harrison  Displays Users Location, Speed and Transportation method, by using GPS and CoreLocation  The User Location icon also changes color depending on the method of transportation
